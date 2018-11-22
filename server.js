@@ -28,7 +28,8 @@ mongoose
 
 // Passport middleware
 app.use(passport.initialize());
-// Everything else with Passport, put into config file
+
+// Passport Config
 require("./config/passport")(passport);
 
 // use routes
@@ -39,5 +40,5 @@ app.use("/api/posts", posts);
 // process.env.PORT necessary to deploy to heroku
 const port = process.env.PORT || 3000;
 
-// use ES6 template literal in console.log to put variable inside string. variable syntax: ${variable}
+// Use ES6 template literal in console.log to put variable inside string. variable syntax: ${variable}
 app.listen(port, () => console.log(`Server running on port ${port}`));
