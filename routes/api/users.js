@@ -14,7 +14,9 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 // To create a protected route
 const passport = require("passport");
-// require("../../config/passport")(passport);
+
+// Load Input Validation
+const validateRegisterInput = require("../../validation/register");
 
 // Load user model to use variable and any mongoose methods that it has
 const User = require("../../models/User");
@@ -31,6 +33,13 @@ router.get("/test", (req, res) => res.json({ msg: "Users works" }));
 // Use mongoose to first find if the email exists ie is already in the database.
 // .findOne() to look for a record of the email the user is trying to register.
 router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body); // req.body includes everything sent to this route ie name, email, password
+
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ email: req.body.email }) // Pass in object to find email that matches req.body.email
     .then(user => {
       if (user) {
