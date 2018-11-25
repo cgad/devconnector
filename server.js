@@ -6,7 +6,7 @@ const passport = require("passport"); // Auth module
 // Point certain URLs to these files
 // For example, if the route is /api/users, connect to this file
 const users = require("./routes/api/users");
-const profiles = require("./routes/api/profiles");
+const profile = require("./routes/api/profile");
 const posts = require("./routes/api/posts");
 
 // Initialize app
@@ -34,7 +34,7 @@ require("./config/passport")(passport);
 
 // use routes
 app.use("/api/users", users);
-app.use("/api/profiles", profiles);
+app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
 // process.env.PORT necessary to deploy to heroku
