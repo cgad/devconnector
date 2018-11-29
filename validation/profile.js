@@ -28,7 +28,7 @@ module.exports = function validateProfileInput(data) {
   }
 
   if (Validator.isEmpty(data.skills)) {
-    errors.skills = "Skills is required";
+    errors.skills = "Skills field is required";
   }
 
   // Non-required fields
