@@ -9,6 +9,9 @@ const passport = require("passport");
 
 // Load Validation
 const validateProfileInput = require("../../validation/profile");
+const validateExperienceInput = require("../../validation/experience");
+const validateEducationInput = require("../../validation/education");
+
 // Load Profile model
 const Profile = require("../../models/Profile");
 // Load User model
@@ -118,16 +121,17 @@ router.post(
     const profileFields = {};
 
     profileFields.user = req.user.id; // User comes from req.user.id, not the form. Includes avatar, name, email
-    if (req.body.handle) profileFields.handle = req.body.handle;
+    if (req.body.handle) profileFields.handle = req.body.handle; // Req'd
     if (req.body.company) profileFields.company = req.body.company;
     if (req.body.website) profileFields.website = req.body.website;
     if (req.body.location) profileFields.location = req.body.location;
-    if (req.body.status) profileFields.status = req.body.status;
+    if (req.body.status) profileFields.status = req.body.status; // Req'd
     if (req.body.bio) profileFields.bio = req.body.bio;
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
 
     // Skills- Split into array instead of having comma-separated values
+    // Req'd
     if (typeof req.body.skills !== "undefined") {
       profileFields.skills = req.body.skills.split(",");
     }
@@ -162,6 +166,74 @@ router.post(
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
+    });
+  }
+);
+
+// @route  POST api/profile/experience
+// @description  Add experience to profile
+// @access  Private (so use passport middleware)
+router.post(
+  "/experience",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateExperienceInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const newExp = {
+        title: req.body.title,
+        company: req.body.company,
+        location: req.body.location,
+        from: req.body.from,
+        to: req.body.to,
+        current: req.body.current,
+        description: req.body.description
+      };
+
+      // Add to experience array at beginning
+      profile.experience.unshift(newExp);
+
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+// @route  POST api/profile/education
+// @description  Add education to profile
+// @access  Private (so use passport middleware)
+router.post(
+  "/education",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEducationInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const newEdu = {
+        school: req.body.school,
+        degree: req.body.degree,
+        fieldofstudy: req.body.fieldofstudy,
+        from: req.body.from,
+        to: req.body.to,
+        current: req.body.current,
+        description: req.body.description
+      };
+
+      // Add to education array at beginning
+      profile.education.unshift(newEdu);
+
+      profile.save().then(profile => res.json(profile));
     });
   }
 );

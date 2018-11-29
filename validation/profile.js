@@ -1,6 +1,4 @@
-// Login rules
-
-// Registration rules
+// Profile rules
 
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
