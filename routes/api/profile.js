@@ -230,10 +230,90 @@ router.post(
         description: req.body.description
       };
 
+      // If school, degree and fieldofstudy are the same as an item already in the education array, replace that item with newEdu
+      // ***
+      // DOES NOT WORK
+      // ***
+      for (var i = 0; i < profile.education.length; i++) {
+        if (
+          profile.education[i].school === newEdu.school &&
+          profile.education[i].degree === newEdu.degree &&
+          profile.education[i].fieldofstudy === newEdu.fieldofstudy &&
+          profile.education[i].from === newEdu.from
+        ) {
+          profile.education.splice(i, 1);
+        }
+      }
+
       // Add to education array at beginning
       profile.education.unshift(newEdu);
 
       profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+// @route  DELETE api/profile/experience/:exp_id
+// @description  Delete experience from profile
+// @access  Private (so use passport middleware)
+router.delete(
+  "/experience/:exp_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        // Get remove index
+        // Map to array of item IDs
+        const removeIndex = profile.experience
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
+
+        // Splice out of array
+        profile.experience.splice(removeIndex, 1);
+
+        // Save
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
+// @route  DELETE api/profile/education/:edu
+// @description  Delete education from profile
+// @access  Private (so use passport middleware)
+router.delete(
+  "/education/:edu",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        // Get remove index
+        // Map to array of item IDs
+        const removeIndex = profile.education
+          .map(item => item.id)
+          .indexOf(req.params.edu);
+
+        // Splice out of array
+        profile.education.splice(removeIndex, 1);
+
+        // Save
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
+// @route  DELETE api/profile
+// @description  Delete user and profile
+// @access  Private
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+      User.findOneAndRemove({ _id: req.user.id }).then(() => {
+        res.json({ success: true });
+      });
     });
   }
 );
