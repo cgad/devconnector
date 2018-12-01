@@ -38,7 +38,7 @@ app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
 // process.env.PORT necessary to deploy to heroku
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // Use ES6 template literal in console.log to put variable inside string. variable syntax: ${variable}
 app.listen(port, () => console.log(`Server running on port ${port}`));
