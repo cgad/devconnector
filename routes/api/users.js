@@ -28,7 +28,7 @@ const User = require("../../models/User");
 // @access  Public
 router.get("/test", (req, res) => res.json({ msg: "Users works" }));
 
-// @route  GET api/users/register
+// @route  POST api/users/register
 // @description  Register user
 // @access  Public
 // Use mongoose to first find if the email exists ie is already in the database.
@@ -78,7 +78,7 @@ router.post("/register", (req, res) => {
     });
 });
 
-// @route  GET api/users/login
+// @route  POST api/users/login
 // @description  Login user / Returning JWT Token
 // @access  Public
 router.post("/login", (req, res) => {
