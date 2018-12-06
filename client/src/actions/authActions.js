@@ -7,8 +7,8 @@
 
 import { TEST_DISPATCH } from "./types";
 
-// Action
-export const registeruser = userData => {
+// Action, to Reducer
+export const registerUser = userData => {
   // Return object w/ a type to dispatch something to the reducer
   return {
     type: TEST_DISPATCH,

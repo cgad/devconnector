@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+// Map properties in component to PropTypes
+import PropTypes from "prop-types";
 import axios from "axios";
 // For conditional className
 import classnames from "classnames";
+// Connect redux to this component
+import { connect } from "react-redux";
+// Import Register action
+import { registerUser } from "../../actions/authActions";
 
 class Register extends Component {
   constructor() {
@@ -19,6 +25,10 @@ class Register extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  // Call registerUser in authActions
+  // Dispatch to reducer
+  // Fill user object
+  // Mapped auth state to a property in this component
   onSubmit = event => {
     event.preventDefault();
 
@@ -29,12 +39,16 @@ class Register extends Component {
       password2: this.state.password2
     };
 
-    // Test API, set up error handling
-    // Instead will do through redux action
-    axios
-      .post("/api/users/register", newUser)
-      .then(res => console.log(res.data))
-      .catch(err => this.setState({ errors: err.response.data }));
+    // Call Register action
+    // Actions brought in are stored in props
+    this.props.registerUser(newUser);
+
+    // Test API
+    // Instead will do through redux action (above)
+    // axios
+    //   .post("/api/users/register", newUser)
+    //   .then(res => console.log(res.data))
+    //   .catch(err => this.setState({ errors: err.response.data }));
   };
 
   render() {
@@ -124,4 +138,20 @@ class Register extends Component {
   }
 }
 
-export default Register;
+// PropTypes.type.whetherrequired
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+// To get auth state in component
+// Put auth state in a property called auth so we can access it with this.props.auth.statething
+const mapStateToProps = state => ({
+  auth: state.auth
+  // state.auth here comes from root reducer (reducers index.js) so this sets auth to authReducer
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(Register);
