@@ -1,5 +1,4 @@
-//
+// Get errors, clear errors, get profile, set current user, etc.
 
 export const GET_ERRORS = "GET_ERRORS";
-
-// Get errors, clear errors, get profile, set current user, etc.
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
