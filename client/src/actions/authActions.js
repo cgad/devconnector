@@ -3,15 +3,23 @@
 // Call request and redirect to Login page on success
 // If error, dispatch 'get errors' action to errors reducer
 
+import axios from "axios";
+
 // Testing
 
-import { TEST_DISPATCH } from "./types";
+import { GET_ERRORS } from "./types";
 
-// Action, to Reducer
-export const registerUser = userData => {
-  // Return object w/ a type to dispatch something to the reducer
-  return {
-    type: TEST_DISPATCH,
-    payload: userData
-  };
+// Action creator, to Reducer
+// Upon successful register, redirect to login
+// If errors, show in form on frontend
+export const registerUser = (userData, history) => dispatch => {
+  axios
+    .post("/api/users/register", userData)
+    .then(res => history.push("/login"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data // Comes from errorReducer
+      })
+    );
 };
