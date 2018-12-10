@@ -6,7 +6,6 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { decode } from "punycode"; // Automatic. Necessary?
 
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
@@ -25,7 +24,9 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
+
 // Login - Get user token, add as Auth header in each request
+
 export const loginUser = userData => dispatch => {
   axios
     .post("/api/users/login", userData)
