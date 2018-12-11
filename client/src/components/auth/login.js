@@ -15,6 +15,14 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    // If logged in, redirect to dashboard
+    // Disable ability to go to login or register page
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");

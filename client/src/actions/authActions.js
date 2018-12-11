@@ -24,7 +24,6 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
-
 // Login - Get user token, add as Auth header in each request
 
 export const loginUser = userData => dispatch => {
@@ -57,4 +56,14 @@ export const setCurrentUser = decoded => {
     type: SET_CURRENT_USER,
     payload: decoded
   };
+};
+
+// Log user out
+export const logoutUser = () => dispatch => {
+  // Remove token from local storage
+  localStorage.removeItem("jwtToken");
+  // Remove auth header for future requests
+  setAuthToken(false);
+  // Set current user to {} which will set isAuthenticated to false (authReducer)
+  dispatch(setCurrentUser({}));
 };

@@ -22,6 +22,14 @@ class Register extends Component {
     };
   }
 
+  componentDidMount() {
+    // If logged in, redirect to dashboard
+    // Disable ability to go to login or register page
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   // Get errors from redux state, map it to props, when we receive new properties and errors is included, set it to this component's state
   componentWillReceiveProps(nextProps) {
     // Test for errors property
