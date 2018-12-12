@@ -18,7 +18,7 @@ class Navbar extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          {/* Not part of router so use a tag instead of Link. Click handler */}
+          {/* Click handler, not part of router so use a tag instead of Link*/}
           <a
             href="#"
             onClick={this.onLogoutClick.bind(this)}
