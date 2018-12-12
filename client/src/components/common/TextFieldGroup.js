@@ -44,6 +44,7 @@ TextFieldGroup.propTypes = {
   disabled: PropTypes.string
 };
 
+// Don't need to add type: 'text' to fields that are text type because text is default
 TextFieldGroup.defaultProps = {
   type: "text"
 };
