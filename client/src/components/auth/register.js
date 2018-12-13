@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 // To redirect from an action
 import { withRouter } from "react-router-dom";
-// For conditional className
-import classnames from "classnames";
 // Connect redux to this component
 import { connect } from "react-redux";
 // Import Register action
