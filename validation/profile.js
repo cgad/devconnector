@@ -18,7 +18,7 @@ module.exports = function validateProfileInput(data) {
   }
 
   if (Validator.isEmpty(data.handle)) {
-    errors.handle = "Handle is required";
+    errors.handle = "Profile handle is required";
   }
 
   if (Validator.isEmpty(data.status)) {
