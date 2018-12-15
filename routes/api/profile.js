@@ -130,7 +130,7 @@ router.post(
     if (req.body.githubusername)
       profileFields.githubusername = req.body.githubusername;
 
-    // Skills- Split into array instead of having comma-separated values
+    // Skills- Split into array instead of leaving as comma-separated values
     // Req'd
     if (typeof req.body.skills !== "undefined") {
       profileFields.skills = req.body.skills.split(",");
