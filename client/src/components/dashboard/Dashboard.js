@@ -29,9 +29,6 @@ class Dashboard extends Component {
     } else {
       // If current user hasn't created a profile, send message and button to create profile component (if profile state = {})
       // If there is profile data, display dashboard with link to profile
-      //
-      // NEW
-      //
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
