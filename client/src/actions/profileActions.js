@@ -71,6 +71,25 @@ export const addEducation = (eduData, history) => dispatch => {
     );
 };
 
+// Delete experience
+// Type GET_PROFILE returns profile as res.data
+export const deleteExperience = id => dispatch => {
+  axios
+    .delete(`/api/profile/experience/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Delete account & profile
 // Send payload of {} to authReducer where user is set to the empty payload, making isAuthenticated false
 export const deleteAccount = () => dispatch => {
