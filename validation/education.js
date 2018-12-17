@@ -19,15 +19,15 @@ module.exports = function validateExperienceInput(data) {
   }
 
   if (Validator.isEmpty(data.degree)) {
-    errors.degree = "Degree title field is required";
+    errors.degree = "Degree or Certification field is required";
   }
 
   if (Validator.isEmpty(data.fieldofstudy)) {
-    errors.fieldofstudy = "Field of study field is required";
+    errors.fieldofstudy = "Field of Study field is required";
   }
 
   if (Validator.isEmpty(data.from)) {
-    errors.from = "From date field is required";
+    errors.from = "From Date field is required";
   }
 
   // Pull these into every route that takes in data
