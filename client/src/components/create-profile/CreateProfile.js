@@ -173,7 +173,7 @@ class CreateProfile extends Component {
                   value={this.state.website}
                   onChange={this.onChange}
                   error={errors.website}
-                  info="Could be your own website or a company website"
+                  info="Could be your own website or a company website."
                 />
                 <TextFieldGroup
                   placeholder="Location"
