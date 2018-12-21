@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/is-empty";
-import { PROFILE_LOADING } from "../../actions/types";
 
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
 
-    // TODO: 
+    // TODO:
     return (
       <div className="row">
         <div className="col-md-12">
