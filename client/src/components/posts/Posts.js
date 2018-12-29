@@ -13,7 +13,7 @@ class Posts extends Component {
   }
 
   render() {
-    const { posts, loading } = this.state;
+    const { posts, loading } = this.props.post;
     let postContent;
 
     if (posts === null || loading) {
@@ -42,6 +42,7 @@ Posts.propTypes = {
   post: PropTypes.object.isRequired // Posts array is within the post state
 };
 
+// State from store
 const mapStateToProps = state => ({
   post: state.post
 });
