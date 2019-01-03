@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import PostItem from "../posts/PostItem";
+import CommentForm from "../post/CommentForm";
+import CommentFeed from "../post/CommentFeed";
 import Spinner from "../common/Spinner";
 import { getPost } from "../../actions/postActions";
 
@@ -20,7 +22,9 @@ class Post extends Component {
     } else {
       postContent = (
         <div>
-          <PostItem post={post} showActions={false}/>
+          <PostItem post={post} showActions={false} />
+          <CommentForm postId={post._id} />
+          <CommentFeed postId={post._id} comments={post.comments} />
         </div>
       );
     }
