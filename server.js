@@ -45,11 +45,11 @@ if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static("client/build"));
   // Create route- get anything that isn't an api route
-  app.get("*", (req, res) =>
+  app.get("*", (req, res) => {
     // Send file using path module (part of NodeJS)
     // in sendFile(), pass in current directory and go into client, build, load index.html
     res.sendFile(path.resolve(__dirname, "client", "build", "index,html"))
-  );
+  });
 }
 
 // process.env.PORT necessary to deploy to heroku
