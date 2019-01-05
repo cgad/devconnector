@@ -2,7 +2,7 @@
   "name": "devconnector",
   "version": "1.0.0",
   "description": "Social network for developers",
-  "engines" {
+  "engines": {
     "node": "8.11.4"
   },
   "main": "server.js",
