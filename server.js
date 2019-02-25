@@ -41,7 +41,7 @@ app.use("/api/posts", posts);
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static("./client/build"));
+  app.use(express.static("client/build"));
   app.get("*", (req, res) => {
     // Load index react file for any path hit here
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
