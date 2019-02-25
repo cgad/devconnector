@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport"); // Auth module
-const path = require("path ");
+const path = require("path");
 
 // Point certain URLs to these files
 // For example, if the route is /api/users, connect to this file
