@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
+import { getCurrentProfile } from "../../actions/profileActions";
 import Post from "../post/Post";
 
 class PostItem extends Component {
@@ -17,13 +18,6 @@ class PostItem extends Component {
 
   onUnlikeClick(id) {
     this.props.removeLike(id);
-  }
-
-  onPicClick() {
-    const { post } = this.props;
-    document
-      .getElementById("prof-link")
-      .setAttribute("href", "profile/" + post.user);
   }
 
   // Find if user has liked the post (is in the likes array)
@@ -46,7 +40,7 @@ class PostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <a id="prof-link" onclick={this.onPicClick.bind(this)}>
+            <a href="#">
               <img
                 className="rounded-circle d-none d-md-block"
                 src={post.avatar}
