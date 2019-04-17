@@ -19,6 +19,13 @@ class PostItem extends Component {
     this.props.removeLike(id);
   }
 
+  onPicClick() {
+    const { post } = this.props;
+    document
+      .getElementById("prof-link")
+      .setAttribute("href", "profile/" + post.user);
+  }
+
   // Find if user has liked the post (is in the likes array)
   // Apply to 'like' button using classnames for dynamic 'text-info' class (if true, apply the class)
   findUserLike(likes) {
@@ -39,7 +46,7 @@ class PostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <a href="profile.html">
+            <a id="prof-link">
               <img
                 className="rounded-circle d-none d-md-block"
                 src={post.avatar}
